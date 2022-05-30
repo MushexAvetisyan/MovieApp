@@ -1,28 +1,46 @@
 <section class="container mx-auto p-6 font-mono">
     <div class="w-full flex mb-4 p-2 justify-end">
-        <x-jet-button>Create Cast</x-jet-button>
+        <form class="flex space-x-4 shadow bg-white rounded-md m-2 p-2">
+            <div class="p-1 flex items-center">
+                <label for="tmdb_id_g" class="block text-sm font-medium text-gray-700 mr-4">
+                    Cast Tmdb Id
+                </label>
+                <div class="relative rounded-md shadow-sm">
+                    <input wire:model="castTMDBId" id="tmdb_id_g" name="tmdb_id_g" class="px-3 py-2 border border-gray-300 rounded" type="text"
+                     placeholder="Cast ID" />
+                </div>
+            </div>
+            <div class="p1">
+                <button type="button" wire:click="generateCast"
+                        class="inline-flex bg-green-500 items-center justify-center py-2 px-4 border
+                border-transparent hover:text-white text-base leading-6 font-medium rounded">
+                    <span>Generate</span>
+                </button>
+            </div>
+        </form>
     </div>
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
             <table class="w-full">
                 <thead>
                 <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                    <th class="px-4 py-3">Title</th>
-                    <th class="px-4 py-3">Date</th>
-                    <th class="px-4 py-3">Rating</th>
-                    <th class="px-4 py-3">Public</th>
+                    <th class="px-4 py-3">Name</th>
+                    <th class="px-4 py-3">Slug</th>
+                    <th class="px-4 py-3">Poster</th>
                     <th class="px-4 py-3">Manage</th>
                 </tr>
                 </thead>
                 <tbody class="bg-white">
-                <tr class="text-gray-700">
-                    <td class="px-4 py-3 border">title here</td>
-                    <td class="px-4 py-3 text-ms font-semibold border">Date here</td>
-                    <td class="px-4 py-3 text-xs border">Rating here</td>
-                    <td class="px-4 py-3 text-sm border">Public</td>
-                    <td class="px-4 py-3 text-sm border">Edit/Delete</td>
-                </tr>
+                @foreach($casts as $cast)
+                    <tr class="text-gray-700">
+                        <td class="px-4 py-3 border">{{ $cast->name }}</td>
+                        <td class="px-4 py-3 text-ms font-semibold border">{{ $cast->slug }}</td>
+                        <td class="px-4 py-3 text-xs border">{{ $cast->poster_path ?? '' }}</td>
+                        <td class="px-4 py-3 text-sm border">Edit/Delete</td>
+                    </tr>
+                @endforeach
                 </tbody>
+                {{ $casts->links('pagination::tailwind') }}
             </table>
         </div>
     </div>

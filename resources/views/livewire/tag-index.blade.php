@@ -6,43 +6,60 @@
         <div class="w-full overflow-x-auto">
             <table class="w-full">
                 <thead>
-                <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                    <th class="px-4 py-3">Title</th>
-                    <th class="px-4 py-3">Date</th>
-                    <th class="px-4 py-3">Rating</th>
-                    <th class="px-4 py-3">Public</th>
+                <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100
+                uppercase border-b border-gray-600">
+                    <th class="px-4 py-3">Name</th>
+                    <th class="px-4 py-3">Slug</th>
                     <th class="px-4 py-3">Manage</th>
                 </tr>
                 </thead>
                 <tbody class="bg-white">
+                @forelse($tags as $tag)
+                    <tr class="text-gray-700">
+                        <td class="px-4 py-3 border">{{$tag->tag_name}}</td>
+                        <td class="px-4 py-3 text-ms font-semibold border">{{$tag->slug}}</td>
+                        <td class="px-4 py-3 text-sm border">
+                            <x-m-button wire:click="showEditModal({{$tag->id}})" class="bg-green-500 hover:bg-green-700 text-white">
+                                Edit
+                            </x-m-button>
+                            <x-m-button wire:click="deleteTag({{$tag->id}})" class="bg-red-500 hover:bg-red-700 text-white">Delete</x-m-button>
+                        </td>
+                    </tr>
+                @empty
                 <tr class="text-gray-700">
-                    <td class="px-4 py-3 border">title here</td>
-                    <td class="px-4 py-3 text-ms font-semibold border">Date here</td>
-                    <td class="px-4 py-3 text-xs border">Rating here</td>
-                    <td class="px-4 py-3 text-sm border">Public</td>
-                    <td class="px-4 py-3 text-sm border">Edit/Delete</td>
+                    <td class="px-4 py-3 border">
+                        Empty
+                    </td>
                 </tr>
+                @endforelse
+
                 </tbody>
             </table>
         </div>
     </div>
     <x-jet-dialog-modal wire:model="showTagModal">
+        @if('$tagId')
+            <x-slot name="title">Update Tag</x-slot>
+        @else
         <x-slot name="title">Create Tag</x-slot>
+        @endif
         <x-slot name="content">
             <div class="mt-10 sm:mt-0">
                     <div class="mt-5 md:mt-0 md:col-span-2">
-                        <form action="#" method="POST">
+                        <form>
                             <div class="shadow overflow-hidden sm:rounded-md">
                                 <div class="px-4 py-5 bg-white sm:p-6">
                                     <div class="grid grid-cols-6 gap-6">
                                         <div class="col-span-6 sm:col-span-3">
-                                            <label for="first-name" class="block text-sm font-medium text-gray-700">Tag Name</label>
-                                            <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            <label for="first-name" class="block text-sm font-medium text-gray-700">
+                                                Tag Name
+                                            </label>
+                                            <input wire:model="tagName" type="text" autocomplete="given-name"
+                                                   class="mt-1 focus:ring-indigo-500
+                                                   focus:border-indigo-500 block w-full shadow-sm sm:text-sm
+                                                   border-gray-300 rounded-md">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
                                 </div>
                             </div>
                         </form>
@@ -50,8 +67,12 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-button wire:click="closeTagModal">Cancel</x-jet-button>
-            <x-jet-button wire:click="closeTagModal" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create</x-jet-button>
+            <x-m-button wire:click="closeTagModal" class="bg-gray-500 hover:bg-gray-800 text-white">Cancel</x-m-button>
+            @if($tagId)
+                <x-m-button wire:click="updateTag">Update</x-m-button>
+            @else
+            <x-m-button wire:click="createTag">Create</x-m-button>
+            @endif
         </x-slot>
     </x-jet-dialog-modal>
 </section>
