@@ -9,29 +9,40 @@
         </div>
 
         <nav class="mt-10">
-            <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25" href="{{route('admin.index')}}">
-                <img class="w-8 h-8" src="{{asset('images/icons/dashboard.svg')}}" alt="dashboard">
+            <a class="{{ (request()->route()->named('admin.index')) ? 'bg-red-500' : 'active' }}
+            flex items-center px-6 py-2 mt-4 text-gray-100  hover:bg-gray-400 hover:bg-opacity-25 hover:text-gray-100" href="{{route('admin.index')}}">
+                <img class="w-8 h-8 filter invert" src="{{asset('images/icons/dashboard.svg')}}" alt="dashboard">
                 <span class="mx-3">Dashboard</span>
             </a>
 
-            <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{route('admin.movies.index')}}">
-                <img class="w-8 h-8" src="{{asset('images/icons/movie.svg')}}" alt="dashboard">
+            <a class="{{ (request()->route()->named('admin.movies.index')) ? 'bg-red-500' : 'active' }}
+            flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 hover:text-gray-100"
+               href="{{route('admin.movies.index')}}">
+                <img class="w-8 h-8 filter invert" src="{{asset('images/icons/movie.svg')}}" alt="dashboard">
                 <span class="mx-3">Movies</span>
             </a>
-            <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{route('admin.series.index')}}">
-                <img class="w-8 h-8" src="{{asset('images/icons/series.svg')}}" alt="dashboard">
+            <a class="{{ (request()->route()->named('admin.series.index')) ? 'bg-red-500' : 'active' }}
+            flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 hover:text-gray-100"
+               href="{{route('admin.series.index')}}">
+                <img class="w-8 h-8 filter invert" src="{{asset('images/icons/series.svg')}}" alt="dashboard">
                 <span class="mx-3">Series</span>
             </a>
-            <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{route('admin.genres.index')}}">
-                <img class="w-8 h-8" src="{{asset('images/icons/category.svg')}}" alt="dashboard">
+            <a class="{{ (request()->route()->named('admin.genres.index')) ? 'bg-red-500' : 'active' }}
+            flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 hover:text-gray-100"
+               href="{{route('admin.genres.index')}}">
+                <img class="w-8 h-8 filter invert" src="{{asset('images/icons/category.svg')}}" alt="dashboard">
                 <span class="mx-3">Genres</span>
             </a>
-            <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{route('admin.casts.index')}}">
-                <img class="w-8 h-8" src="{{asset('images/icons/cast.svg')}}" alt="dashboard">
+            <a class="{{ (request()->route()->named('admin.casts.index')) ? 'bg-red-500' : 'active' }}
+            flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 hover:text-gray-100"
+               href="{{route('admin.casts.index')}}">
+                <img class="w-8 h-8 filter invert" src="{{asset('images/icons/cast.svg')}}" alt="dashboard">
                 <span class="mx-3">Casts</span>
             </a>
-            <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{route('admin.tags.index')}}">
-                <img class="w-8 h-8" src="{{asset('images/icons/tag.svg')}}" alt="dashboard">
+            <a class="{{ (request()->route()->named('admin.tags.index')) ? 'bg-red-500' : 'active' }}
+            flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 hover:text-gray-100"
+               href="{{route('admin.tags.index')}}">
+                <img class="w-8 h-8 filter invert" src="{{asset('images/icons/tag.svg')}}" alt="dashboard">
                 <span class="mx-3">Tags</span>
             </a>
         </nav>
