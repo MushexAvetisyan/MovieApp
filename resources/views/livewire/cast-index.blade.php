@@ -40,7 +40,7 @@
                             <x-m-button wire:click="showEditModal({{$cast->id}})" class="bg-green-500 hover:bg-green-700 text-white">
                                 Edit
                             </x-m-button>
-                            <x-m-button wire:click="deleteTag({{$cast->id}})" class="bg-red-500 hover:bg-red-700 text-white">Delete</x-m-button>
+                            <x-m-button wire:click="deleteCast({{$cast->id}})" class="bg-red-500 hover:bg-red-700 text-white">Delete</x-m-button>
                         </td>
                     </tr>
                 @endforeach
