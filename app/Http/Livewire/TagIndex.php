@@ -12,8 +12,12 @@ class TagIndex extends Component
     public $showTagModal = false;
     public $tagName;
     public $tagId;
-
     public $tags = [];
+
+    protected $rules = [
+        'tagName' => 'required',
+    ];
+
 
     /**
      * @return void
@@ -23,6 +27,7 @@ class TagIndex extends Component
         $this->showTagModal = true;
     }
 
+
     /**
      * @return void
      */
@@ -31,6 +36,7 @@ class TagIndex extends Component
         $this->showTagModal = false;
     }
 
+
     /**
      * @return View
      */
@@ -38,6 +44,7 @@ class TagIndex extends Component
     {
         return view('livewire.tag-index');
     }
+
 
     /**
      * @return void
@@ -55,6 +62,11 @@ class TagIndex extends Component
         ['style' => 'success', 'message' => 'Tag Created successfully']);
     }
 
+
+    /**
+     * @param $tagId
+     * @return void
+     */
     public function showEditModal($tagId)
     {
         $this->reset(['tagName']);
@@ -64,8 +76,13 @@ class TagIndex extends Component
         $this->showTagModal = true;
     }
 
+
+    /**
+     * @return void
+     */
     public function updateTag()
     {
+        $this->validate();
         $tag = Tag::findOrFail($this->tagId);
         $tag->update([
            'tag_name' => $this->tagName,
@@ -78,6 +95,11 @@ class TagIndex extends Component
             ['style' => 'success', 'message' => 'Tag Updated successfully']);
     }
 
+
+    /**
+     * @param $tagId
+     * @return void
+     */
     public function deleteTag($tagId)
     {
         $tag = Tag::findOrFail($tagId);

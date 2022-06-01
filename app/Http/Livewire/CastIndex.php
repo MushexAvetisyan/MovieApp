@@ -17,8 +17,13 @@ class CastIndex extends Component
     public $castName;
     public $castPosterPath;
     public $castId;
-
     public $showCastModal = false;
+
+    protected $rules = [
+        'castName' => 'required',
+        'castPosterPath' => 'required'
+    ];
+
 
     /**
      * @return void
@@ -45,15 +50,58 @@ class CastIndex extends Component
        }
     }
 
+    /**
+     * @param $id
+     * @return void
+     */
     public function showEditModal($id)
     {
-      $this->showCastModal = true;
       $this->castId = $id;
+      $this->loadCast();
+      $this->showCastModal = true;
     }
 
+    /**
+     * @return void
+     */
+    public function loadCast()
+    {
+      $cast = Cast::findOrFail($this->castId);
+      $this->castName = $cast->name;
+      $this->castPosterPath = $cast->poster_path;
+    }
+
+
+    /**
+     * @return void
+     */
+    public function updateCast()
+    {
+      $this->validate();
+        $cast = Cast::findOrFail($this->castId);
+        $cast->update([
+           'name' => $this->castName,
+           'poster_path' => $this->castPosterPath
+        ]);
+        $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Cast Updated']);
+        $this->reset();
+    }
+
+
+    public function deleteCast($id)
+    {
+        Cast::findOrFail($id)->delete();
+        $this->dispatchBrowserEvent('banner-message', ['style' => 'danger', 'message' => 'Cast Deleted']);
+        $this->reset();
+    }
+
+    /**
+     * @return void
+     */
     public function closeCastModal()
     {
         $this->reset();
+        $this->resetValidation();
     }
 
 
