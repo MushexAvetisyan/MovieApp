@@ -34,8 +34,8 @@
                 @foreach($casts as $cast)
                     <tr class="text-gray-700">
                         <td class="px-4 py-3 border">{{ $cast->name }}</td>
-                        <td class="px-4 py-3 text-ms font-semibold border">{{ $cast->slug }}</td>
-                        <td class="px-4 py-3 text-xs border">{{ $cast->poster_path ?? '' }}</td>
+                        <td class="px-4 py-3 text-ms font-semibold border">{{ $cast->slug }}</td>\
+                        <td><img class="rounded w-12 h-12" src="https://image.tmdb.org/t/p/w500/{{ $cast->poster_path ?? 'Image Come Soon' }}" alt=""></td>
                         <td class="px-4 py-3 text-sm border">
                             <x-m-button wire:click="showEditModal({{$cast->id}})" class="bg-green-500 hover:bg-green-700 text-white">
                                 Edit
