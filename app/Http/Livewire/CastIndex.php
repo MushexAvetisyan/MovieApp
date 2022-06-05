@@ -30,24 +30,24 @@ class CastIndex extends Component
      */
     public function generateCast()
     {
-       $newCast = Http::get('https://api.themoviedb.org/3/person/'. $this->castTMDBId .'?api_key=601298c356a67798a77090dae86d6a1c&language=en-US
+        $newCast = Http::get('https://api.themoviedb.org/3/person/'. $this->castTMDBId .'?api_key=601298c356a67798a77090dae86d6a1c&language=en-US
        ')->json();
 
-       $cast = Cast::where('tmdb_id', $newCast['id'])->first();
-       if (!$cast){
-           Cast::create([
-               'tmdb_id' => $newCast['id'],
-               'name' => $newCast['name'],
-               'slug' => Str::slug($newCast['name']),
-               'poster_path' => $newCast['profile_path'] ?? 'Profile picture coming soon',
-           ]);
-           $this->reset();
-           $this->tags = Cast::all();
-           $this->dispatchBrowserEvent('banner-message',
-               ['style' => 'success', 'message' => 'Cast Created successfully']);
-       } else {
-           $this->dispatchBrowserEvent('banner-message', ['style' => 'danger', 'message' => 'Cast Exist']);
-       }
+        $cast = Cast::where('tmdb_id', $newCast['id'])->first();
+        if (!$cast){
+            Cast::create([
+                'tmdb_id' => $newCast['id'],
+                'name' => $newCast['name'],
+                'slug' => Str::slug($newCast['name']),
+                'poster_path' => $newCast['profile_path'] ?? 'Profile picture coming soon',
+            ]);
+            $this->reset();
+            $this->tags = Cast::all();
+            $this->dispatchBrowserEvent('banner-message',
+                ['style' => 'success', 'message' => 'Cast Created successfully']);
+        } else {
+            $this->dispatchBrowserEvent('banner-message', ['style' => 'danger', 'message' => 'Cast Exist']);
+        }
     }
 
     /**
@@ -56,9 +56,9 @@ class CastIndex extends Component
      */
     public function showEditModal($id)
     {
-      $this->castId = $id;
-      $this->loadCast();
-      $this->showCastModal = true;
+        $this->castId = $id;
+        $this->loadCast();
+        $this->showCastModal = true;
     }
 
     /**
@@ -66,9 +66,9 @@ class CastIndex extends Component
      */
     public function loadCast()
     {
-      $cast = Cast::findOrFail($this->castId);
-      $this->castName = $cast->name;
-      $this->castPosterPath = $cast->poster_path;
+        $cast = Cast::findOrFail($this->castId);
+        $this->castName = $cast->name;
+        $this->castPosterPath = $cast->poster_path;
     }
 
 
@@ -77,11 +77,11 @@ class CastIndex extends Component
      */
     public function updateCast()
     {
-      $this->validate();
+        $this->validate();
         $cast = Cast::findOrFail($this->castId);
         $cast->update([
-           'name' => $this->castName,
-           'poster_path' => $this->castPosterPath
+            'name' => $this->castName,
+            'poster_path' => $this->castPosterPath
         ]);
         $this->dispatchBrowserEvent('banner-message', ['style' => 'success', 'message' => 'Cast Updated']);
         $this->reset();

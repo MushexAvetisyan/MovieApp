@@ -21,7 +21,7 @@
     </div>
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
-            <table class="w-full">
+            <table class="w-full text-center">
                 <thead>
                 <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
                     <th class="px-4 py-3">Name</th>
@@ -34,8 +34,8 @@
                 @foreach($casts as $cast)
                     <tr class="text-gray-700">
                         <td class="px-4 py-3 border">{{ $cast->name }}</td>
-                        <td class="px-4 py-3 text-ms font-semibold border">{{ $cast->slug }}</td>\
-                        <td><img class="rounded w-12 h-12" src="https://image.tmdb.org/t/p/w500/{{ $cast->poster_path ?? 'Image Come Soon' }}" alt=""></td>
+                        <td class="px-4 py-3 text-ms font-semibold border">{{ $cast->slug }}</td>
+                        <td><img class="rounded w-20 h-32" src="https://image.tmdb.org/t/p/w500/{{ $cast->poster_path ?? 'Image Come Soon' }}" alt=""></td>
                         <td class="px-4 py-3 text-sm border">
                             <x-m-button wire:click="showEditModal({{$cast->id}})" class="bg-green-500 hover:bg-green-700 text-white">
                                 Edit
